@@ -2,30 +2,30 @@
 #include <vector>
 using namespace std;
 
-int sumOfBitDifferences(const vector<int>& arr) {
-    int n = arr.size();
-    long long total = 0;
-    for (int bit = 0; bit < 32; bit++) {
-        int ones = 0;
+long long calc(const vector<int>& v) {
+    int m = v.size();
+    long long ans = 0;
 
-        for (int num : arr) {
-            if (num & (1 << bit))
-                ones++;
+    for (int b = 0; b < 32; b++) {
+        int c1 = 0;
+
+        for (int x : v) {
+            if (x & (1 << b)) c1++;
         }
 
-        int zeros = n - ones;
-        total += 2LL * ones * zeros;
+        int c0 = m - c1;
+        ans += 2LL * c1 * c0;
     }
 
-    return total;
+    return ans;
 }
 
 int main() {
-    vector<int> arr1 = {1, 3, 5};
-    vector<int> arr2 = {2, 3};
+    vector<int> a = {1, 3, 5};
+    vector<int> b = {2, 3};
 
-    cout << sumOfBitDifferences(arr1) << endl; // Output: 8
-    cout << sumOfBitDifferences(arr2) << endl; // Output: 2
+    cout << calc(a) << endl;
+    cout << calc(b) << endl;
 
     return 0;
 }
